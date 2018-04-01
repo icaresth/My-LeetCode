@@ -1,1 +1,41 @@
+# The time complexity is o(n*n), some testtask cannot pass because of time limitation
 
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        l = len(nums)
+        
+        if l <= 1:
+            return false
+        
+        for i in range(l):
+            for j in range(l):
+                if j == i:
+                    continue
+                if nums[i] + nums[j] == target:
+                    return [i, j]
+
+# Solution, time complexity o(n)
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        l = len(nums)
+        
+        if l <= 1:
+            return false
+        
+        mydict = {}
+        
+        for i in range(l):
+            if nums[i] in mydict:
+                return [mydict[nums[i]], i]
+            else:
+                mydict[target-nums[i]] = i  # build a complementary dictionary
