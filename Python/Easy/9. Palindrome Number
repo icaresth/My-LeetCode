@@ -1,0 +1,21 @@
+# My method
+class Solution(object):
+    def isPalindrome(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+        sign = (x > 0) - (x < 0)
+        if sign < 0:
+            return bool(0)
+        nx = abs(x)
+        string = str(nx)
+        length = len(string)
+        mid = length/2
+        res = 1
+        for i in range(mid):
+            res = res * int(string[i]==string[length-1-i])
+        return bool(res)
+        
+# Other method, it makes me depressed。。。
+return int(str(abs(x))[::-1]) == x
