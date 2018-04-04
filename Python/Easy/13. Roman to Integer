@@ -1,0 +1,64 @@
+# my method, 268ms cost
+def roman2Int(s):
+    if s == 'I':
+        return 1
+    if s == 'V':
+        return 5
+    if s == 'X':
+        return 10
+    if s == 'L':
+        return 50
+    if s == 'C':
+        return 100
+    if s == 'D':
+        return 500
+    if s == 'M':
+        return 1000
+
+
+class Solution(object):
+    def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        l = len(s)
+        res = 0
+        
+        for i in range(l-1):
+            if (roman2Int(s[i]) < roman2Int(s[i+1])) and ((s[i] == 'I') or (s[i] == 'X') or (s[i] == 'C')):
+                res = res - roman2Int(s[i])
+            else:
+                res = res + roman2Int(s[i])
+                
+        res = res + roman2Int(s[-1])
+        return res
+        
+ # Other method, 190ms cost
+ class Solution(object):
+    def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """ 
+        roman = {'M': 1000,'D': 500 ,'C': 100,'L': 50,'X': 10,'V': 5,'I': 1}
+        z = 0
+        for i in range(0, len(s) - 1):
+            if roman[s[i]] < roman[s[i+1]]:
+                z -= roman[s[i]]
+            else:
+                z += roman[s[i]]
+        return z + roman[s[-1]]
+        
+ # Other method, 193ms cost
+ class Solution(object):
+    def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        res, p = 0, 'I'
+        d = {'M':1000, 'D':500, 'C':100, 'L':50, 'X':10, 'V':5, 'I':1}
+        for c in s[::-1]:
+            res, p = res - d[c] if d[c] < d[p] else res + d[c], c
+        return res
