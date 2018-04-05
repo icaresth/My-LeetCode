@@ -1,0 +1,40 @@
+# my code, 39ms cost, beats 72.5%, happy
+class Solution(object):
+    def longestCommonPrefix(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: str
+        """
+        l = len(strs)
+        if l == 0:
+            return ''
+        
+        sst = 99999
+        res = ''
+        cur = ''
+        
+        for i in range(l):
+            if len(strs[i]) < sst:
+                sst = len(strs[i])
+                
+        for i in range(sst):
+            cur = strs[0][i]
+            for j in range(l):
+                if cur != strs[j][i]:
+                    return res
+                else:
+                    continue
+            res = res + cur
+        
+        return res
+        
+ # other method, 40ms cost
+  def longestCommonPrefix(self, strs):
+        if not strs:
+            return ""
+            
+        for i, letter_group in enumerate(zip(*strs)):
+            if len(set(letter_group)) > 1:
+                return strs[0][:i]
+        else:
+            return min(strs)
