@@ -1,0 +1,56 @@
+# my method, 40ms cost, 70% beat, just soo, not happy
+class Solution(object):
+    def removeElement(self, nums, val):
+        """
+        :type nums: List[int]
+        :type val: int
+        :rtype: int
+        """
+        if nums == []:
+            return 0
+        
+        l = len(nums)
+        
+        i = 0
+        while (True):
+            if nums[i] == val:
+                nums.remove(nums[i])
+                if nums == []:
+                    return 0
+                l = l - 1
+                i = i - 1
+                if i < 0:
+                    i = 0
+            else:
+                i = i + 1
+            if i == l:
+                break
+                        
+        return len(nums)
+        
+# other method, 40ms cost, better
+class Solution(object):
+    def removeElement(self, nums, val):
+        """
+        :type nums: List[int]
+        :type val: int
+        :rtype: int
+        """
+        i= 0
+        for j in range(len(nums)):
+            if nums[j] != val:
+                nums[i] = nums[j]
+                i += 1
+        return i
+        
+# other method, 41ms, better
+class Solution(object):
+    def removeElement(self, nums, val):
+        """
+        :type nums: List[int]
+        :type val: int
+        :rtype: int
+        """
+        for i in range(len(nums))[::-1]:
+            if nums[i] == val:
+                del nums[i]
