@@ -1,0 +1,32 @@
+# my method, 35ms cost, 87% beat
+class Solution(object):
+    def strStr(self, haystack, needle):
+        """
+        :type haystack: str
+        :type needle: str
+        :rtype: int
+        """
+        lh = len(haystack)
+        ln = len(needle)
+        if lh <ln:
+            return -1
+        
+        if ln == 0:
+            return 0
+            
+        if haystack == needle:
+            return 0
+                
+        flag = False
+        
+        for i in range(0, lh-ln+1):
+            if haystack[i:i+ln] == needle:
+                return i
+            else:
+                continue
+
+        return -1
+        
+# other method, use BIF
+
+haystack.find(needle)
