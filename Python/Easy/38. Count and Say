@@ -1,0 +1,82 @@
+# my method, 45ms cost, 43% beat
+def read(s):
+    res = ''
+    l = len(s)
+    if l == 1:
+        return res + str(l) + str(s[0])
+
+    i = 0
+    n = 1
+    while (i < l - 1):
+        c = s[i]
+
+        if s[i + 1] == c:
+            n = n + 1
+            c = s[i + 1]
+            if i + 1 == l - 1:
+                res = res + str(n) + str(c)
+                break
+        else:
+            res = res + str(n) + str(c)
+            c = s[i + 1]
+            n = 1
+            if i + 1 == l - 1:
+                res = res + str(1) + str(c)
+                break
+        i = i + 1
+    return res
+
+def f(n):
+    cur = '1'
+    if n == 1:
+        return '1'
+    for i in range(1,n):
+        cur = read(cur)
+    return cur
+            
+
+class Solution(object):
+    def countAndSay(self, n):
+        """
+        :type n: int
+        :rtype: str
+        """
+        return f(n)
+        
+# other method, 41ms cost, 66% beat
+result='1'
+        for i in range(0,n-1):
+            sequence=''
+            count=1
+            for j in range(1,len(result)):
+                if(result[j]==result[j-1]):
+                    count+=1
+                else:
+                    sequence+=str(count)+result[j-1]
+                    count=1
+            sequence+=str(count)+result[len(result)-1]
+            result=sequence
+        return result
+        
+# other method
+class Solution(object):
+    def countAndSay(self, n):
+        """
+        :type n: int
+        :rtype: str
+        """
+        if n < 1: return ''
+        res = '1'
+        for j in range(1, n):
+            temp = ''
+            prev = res[0]
+            cnt = 1
+            for jj in res[1:]:
+                if jj == prev:
+                    cnt += 1
+                else:
+                    temp += str(cnt)+prev
+                    prev = jj
+                    cnt = 1
+            res = temp + str(cnt) + prev
+        return res
