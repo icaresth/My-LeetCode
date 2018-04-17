@@ -1,0 +1,48 @@
+# my method, divide 2 method, 65ms cost, 45% beat
+class Solution(object):
+    def mySqrt(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        if x == 0:
+            return 0
+        if x == 1:
+            return 1
+
+        l = 0
+        r = x
+    
+        m = l + (r - l) / 2
+
+        while(True):
+            if m * m > x:
+                r = m
+            else:
+                l = m
+
+            f = m
+
+        
+            m = l + (r - l) / 2
+
+            if (abs(m - f) < 1):
+                break
+
+        return m
+        
+# other method, 53ms cost, 94% beat
+class Solution(object):
+    def mySqrt(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        if x == 0:
+            return 0
+        elif x < 4:
+            return 1
+        r = x
+        while r * r > x:
+            r = (x / r + r) / 2
+        return r
