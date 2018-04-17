@@ -1,0 +1,79 @@
+# my method, 65ms cost, 25% beat, bad
+class Solution(object):
+    def addBinary(self, a, b):
+        """
+        :type a: str
+        :type b: str
+        :rtype: str
+        """
+        x = 0
+        y = 0
+        la = len(a)
+        lb = len(b)
+
+        # turn to base 10
+        for i in range(la):
+            w = int(a[-i-1])
+            p = i
+            x = x + w * pow(2, p)
+
+        for j in range(lb):
+            w = int(b[-j-1])
+            p = j
+            y = y + w * pow(2, p)
+
+        # cal sum
+        r = x + y
+
+        # turn r to base 2
+        rs = ''
+        while(True):
+            cur = r % 2
+            rs = str(cur) + rs
+            r = r / 2
+            if r == 0:
+                break
+
+        return rs
+        
+# other method, 37ms cost, 98% beat
+class Solution(object):
+    def addBinary(self, a, b):
+        """
+        :type a: str
+        :type b: str
+        :rtype: str
+        """
+        s = int(a, 2) + int(b, 2)
+        return '{0:b}'.format(s)
+        
+# other method
+class Solution(object):
+    def addBinary(self, a, b):
+        """
+        :type a: str
+        :type b: str
+        :rtype: str
+        """
+        return bin(int(a,2)+int(b,2))[2:]
+        
+# other method, good 
+class Solution(object):
+    def addBinary(self, a, b):
+        """
+        :type a: str
+        :type b: str
+        :rtype: str
+        """
+        if a == "":
+            return b
+        if b == "":
+            return a
+        a_2 = int(a,2)
+        b_2 = int(b,2)
+        carry = 1
+        while carry != 0:
+            carry = (a_2 & b_2)<<1
+            a_2 = a_2 ^ b_2
+            b_2 = carry
+        return bin(a_2)[2:]
