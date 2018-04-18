@@ -1,0 +1,54 @@
+# my method 1 and 2
+class Solution(object):
+    def climbStairs(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        # the answer is a fabonaci sequence
+        
+        
+        # method 1: recursion, o(2^n)
+        # if n == 1:
+        #     return 1
+        # if n == 2:
+        #     return 2
+        # return self.climbStairs(n-2) + self.climbStairs(n-1)
+        
+        # method 2: for loop, o(n), 32ms cost, 70% beat
+        if n == 1:
+            return 1
+        if n == 2:
+            return 2
+        a = 1
+        b = 2
+        r = 0
+        
+        for i in range(3,n + 1):
+            r = a + b
+            a = b
+            b = r
+            
+        return r
+        
+        # method 3, use matrix to calculate, o(lgn)
+        
+# other method
+
+class Solution(object):
+    
+    memo = {}
+    
+    def climbStairs(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        
+        if n == 0 or n == 1: return 1
+        
+        if n in self.memo: return self.memo[n]
+        
+        self.memo[n] = self.climbStairs(n-2) + self.climbStairs(n - 1)
+        
+        return self.memo[n]
