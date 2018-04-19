@@ -1,0 +1,90 @@
+# my method, 58ms cost, 31.59% beat
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+# remove the duplicates
+def dl(head):
+    cur = head
+        
+    if head == None:
+        return head
+        
+    while (True):
+        if cur.next == None:
+            break
+                
+        if cur.val == cur.next.val:
+            cur.next = cur.next.next
+            if cur.next == None:
+                break
+                
+        cur = cur.next
+    return head
+
+# judge if there are duplicates, if True, do remove again
+def jd(head):
+    cur = head
+    flag = True
+    if head == None:
+        return flag
+    while(True):
+        if cur.next == None:
+            break
+        if cur.val == cur.next.val:
+            flag = False
+            return flag
+        cur = cur.next
+
+
+class Solution(object):
+    def deleteDuplicates(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """  
+        r = head
+        
+        while(jd(head) == False):
+            r = dl(r)
+            
+        return r
+        
+# other method, 54ms cost
+class Solution(object):
+    def deleteDuplicates(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """  
+        node = head
+        while node:
+            while node.next and node.next.val == node.val:
+                node.next = node.next.next
+                
+            node = node.next
+            
+        return head
+        
+# other method, 50ms cost, 96% beat
+class Solution(object):
+    def deleteDuplicates(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """  
+        if not head:
+            return None
+        
+        cur = head
+        
+        while cur.next:
+            if cur.val == cur.next.val:
+                cur.next = cur.next.next
+            else:
+                cur = cur.next
+        
+        return head
